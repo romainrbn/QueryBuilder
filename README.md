@@ -8,7 +8,6 @@ A type-safe, expressive SQL query builder for Swift that enables you to write SQ
 - 💪 Powerful expression composition
 - 🎯 Intuitive Swift-like syntax
 - 📦 Zero dependencies
-- 🧪 Thoroughly tested
 
 ## Usage
 
