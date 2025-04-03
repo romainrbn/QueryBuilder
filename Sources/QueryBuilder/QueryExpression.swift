@@ -6,7 +6,7 @@
 //
 
 /// A protocol that represents a component of a SQL query.
-protocol QueryExpression<QueryValue> {
+public protocol QueryExpression<QueryValue> {
     associatedtype QueryValue = ()
     var queryString: String { get }
 }

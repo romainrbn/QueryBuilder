@@ -6,24 +6,24 @@
 //
 
 @resultBuilder
-enum OrderBuilder {
-    static func buildBlock(_ components: [String]) -> [String] {
+public enum OrderBuilder {
+    public static func buildBlock(_ components: [String]) -> [String] {
         components
     }
 
-    static func buildOptional(_ component: [String]?) -> [String] {
+    public static func buildOptional(_ component: [String]?) -> [String] {
         component ?? []
     }
 
-    static func buildEither(first component: [String]) -> [String] {
+    public static func buildEither(first component: [String]) -> [String] {
         component
     }
 
-    static func buildEither(second component: [String]) -> [String] {
+    public  static func buildEither(second component: [String]) -> [String] {
         component
     }
 
-    static func buildExpression<each OrderingTerm: QueryExpression>(
+    public static func buildExpression<each OrderingTerm: QueryExpression>(
         _ orders: (repeat each OrderingTerm)
     ) -> [String] {
         var orderStrings: [String] = []

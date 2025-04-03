@@ -5,10 +5,9 @@
 //  Created by Romain Rabouan on 03/04/2025.
 //
 
-
-struct AvgFunction<Base: QueryExpression>: QueryExpression {
+public struct AvgFunction<Base: QueryExpression>: QueryExpression {
     let base: Base
-    var queryString: String {
+    public var queryString: String {
         "avg(\(base.queryString))"
     }
 }

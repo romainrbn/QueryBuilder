@@ -6,12 +6,12 @@
 //
 
 /// A query builder for constructing SELECT SQL queries.
-struct Select<From: Table>: QueryExpression {
+public struct Select<From: Table>: QueryExpression {
     var columns: [String]
     var orders: [String] = []
     var wheres: [String] = []
 
-    var queryString: String {
+    public var queryString: String {
         var sql = """
         SELECT \(columns.isEmpty ? "*" : columns.joined(separator: ", "))
         FROM \(From.tableName)
@@ -43,7 +43,7 @@ struct Select<From: Table>: QueryExpression {
     /// FROM reminders
     /// ORDER BY isCompleted, id DESC
     /// ```
-    func order(
+    public func order(
         @OrderBuilder build orders: (From.Columns) -> [String]
     ) -> Select {
         Select(
@@ -64,7 +64,7 @@ struct Select<From: Table>: QueryExpression {
     /// FROM reminders
     /// ORDER BY priority, title
     /// ```
-    func order<each OrderingTerm: QueryExpression>(
+    public func order<each OrderingTerm: QueryExpression>(
         _ orders: (From.Columns) -> (repeat each OrderingTerm)
     ) -> Select {
         let orders = orders(From.columns)
@@ -91,7 +91,7 @@ struct Select<From: Table>: QueryExpression {
     /// FROM reminders
     /// WHERE isCompleted
     /// ```
-    func `where`(
+    public func `where`(
         _ predicate: (From.Columns) -> some QueryExpression<Bool>
     ) -> Select {
         Select(

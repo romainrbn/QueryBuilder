@@ -6,7 +6,7 @@
 //
 
 /// Represents a database table.
-protocol Table {
+public protocol Table {
     associatedtype Columns
     static var tableName: String { get }
     static var columns: Columns { get }
@@ -15,12 +15,12 @@ protocol Table {
 /// Provides convenience methods for constructing SQL queries on tables.
 extension Table {
     /// Constructs a SELECT query with the specified column names.
-    static func select(_ columns: String...) -> Select<Self> {
+    public static func select(_ columns: String...) -> Select<Self> {
         Select(columns: columns)
     }
 
     /// Constructs a SELECT query using column expressions provided by a result builder.
-    static func select<each ResultColumn: QueryExpression>(
+    public static func select<each ResultColumn: QueryExpression>(
         _ columns: (Columns) -> (repeat each ResultColumn)
     ) -> Select<Self> {
         let columns = columns(Self.columns)
@@ -45,7 +45,7 @@ extension Table {
     /// SELECT *
     /// FROM reminders
     /// ```
-    static func all() -> Select<Self> {
+    public static func all() -> Select<Self> {
         Select(columns: [])
     }
 
@@ -60,7 +60,7 @@ extension Table {
     /// SELECT count(id)
     /// FROM reminders
     /// ```
-    static func count() -> Select<Self> {
+    public static func count() -> Select<Self> {
         Select(columns: ["count(*)"])
     }
 }

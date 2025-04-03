@@ -5,17 +5,17 @@
 //  Created by Romain Rabouan on 03/04/2025.
 //
 
-enum NullOrder: String {
+public enum NullOrder: String {
     case first = "FIRST"
     case last = "LAST"
 }
 
-struct OrderingTerm<Base: QueryExpression>: QueryExpression {
+public struct OrderingTerm<Base: QueryExpression>: QueryExpression {
     let isAscending: Bool
     let nullOrder: NullOrder?
-    let base: Base
+    public let base: Base
 
-    var queryString: String {
+    public var queryString: String {
         var sql = "\(base.queryString)\(isAscending ? " ASC" : " DESC")"
         if let nullOrder {
             sql.append(" NULLS \(nullOrder.rawValue)")

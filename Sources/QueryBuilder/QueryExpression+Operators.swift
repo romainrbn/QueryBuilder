@@ -20,15 +20,15 @@
 /// FROM reminders
 /// WHERE NOT (isCompleted)
 /// ```
-prefix func ! (expression: some QueryExpression<Bool>) -> some QueryExpression<Bool> {
+public prefix func ! (expression: some QueryExpression<Bool>) -> some QueryExpression<Bool> {
     Negate(base: expression)
 }
 
 /// Negates a boolean query expression.
-struct Negate<Base: QueryExpression<Bool>>: QueryExpression {
-    typealias QueryValue = Bool
+public struct Negate<Base: QueryExpression<Bool>>: QueryExpression {
+    public typealias QueryValue = Bool
     let base: Base
-    var queryString: String {
+    public var queryString: String {
         "NOT (\(base.queryString))"
     }
 }
@@ -36,17 +36,17 @@ struct Negate<Base: QueryExpression<Bool>>: QueryExpression {
 // MARK: Equals
 
 /// Overloads the equality operator for non-optional query expressions.
-func == <T>(lhs: some QueryExpression<T>, rhs: some QueryExpression<T>) -> some QueryExpression<Bool> {
+public func == <T>(lhs: some QueryExpression<T>, rhs: some QueryExpression<T>) -> some QueryExpression<Bool> {
     Equals(lhs: lhs, rhs: rhs)
 }
 
 /// Overloads the equality operator for an optional and non-optional query expression.
-func == <T>(lhs: some QueryExpression<T?>, rhs: some QueryExpression<T>) -> some QueryExpression<Bool> {
+public func == <T>(lhs: some QueryExpression<T?>, rhs: some QueryExpression<T>) -> some QueryExpression<Bool> {
     Equals(lhs: lhs, rhs: rhs)
 }
 
 /// Overloads the equality operator for a non-optional and optional query expression.
-func == <T>(lhs: some QueryExpression<T>, rhs: some QueryExpression<T?>) -> some QueryExpression<Bool> {
+public func == <T>(lhs: some QueryExpression<T>, rhs: some QueryExpression<T?>) -> some QueryExpression<Bool> {
     Equals(lhs: lhs, rhs: rhs)
 }
 
@@ -54,12 +54,12 @@ func == <T>(lhs: some QueryExpression<T>, rhs: some QueryExpression<T?>) -> some
 /// - Parameter lhs: The first element to compare
 /// - Parameter rhs: The second element to compare
 /// - Returns: A `QueryExpression` for the `=` condition between the two elements.
-struct Equals<LHS: QueryExpression, RHS: QueryExpression>: QueryExpression {
-    typealias QueryValue = Bool
+public struct Equals<LHS: QueryExpression, RHS: QueryExpression>: QueryExpression {
+    public typealias QueryValue = Bool
     let lhs: LHS
     let rhs: RHS
 
-    var queryString: String {
+    public var queryString: String {
         "(\(lhs.queryString) = \(rhs.queryString))"
     }
 }
@@ -67,7 +67,7 @@ struct Equals<LHS: QueryExpression, RHS: QueryExpression>: QueryExpression {
 // MARK: OR
 
 /// Logical OR operator for boolean query expressions.
-func || (lhs: some QueryExpression<Bool>, rhs: some QueryExpression<Bool>) -> some QueryExpression<Bool> {
+public func || (lhs: some QueryExpression<Bool>, rhs: some QueryExpression<Bool>) -> some QueryExpression<Bool> {
     Or(lhs: lhs, rhs: rhs)
 }
 
@@ -75,12 +75,12 @@ func || (lhs: some QueryExpression<Bool>, rhs: some QueryExpression<Bool>) -> so
 /// - Parameter lhs: The first element to compare
 /// - Parameter rhs: The second element to compare
 /// - Returns: A `QueryExpression` for the OR condition between the two elements.
-struct Or<LHS: QueryExpression, RHS: QueryExpression>: QueryExpression {
-    typealias QueryValue = Bool
+public struct Or<LHS: QueryExpression, RHS: QueryExpression>: QueryExpression {
+    public typealias QueryValue = Bool
     let lhs: LHS
     let rhs: RHS
 
-    var queryString: String {
+    public var queryString: String {
         "(\(lhs.queryString) OR \(rhs.queryString))"
     }
 }
@@ -88,7 +88,7 @@ struct Or<LHS: QueryExpression, RHS: QueryExpression>: QueryExpression {
 // MARK: - AND
 
 /// Logical AND operator for boolean query expressions.
-func && (lhs: some QueryExpression<Bool>, rhs: some QueryExpression<Bool>) -> some QueryExpression<Bool> {
+public func && (lhs: some QueryExpression<Bool>, rhs: some QueryExpression<Bool>) -> some QueryExpression<Bool> {
     And(lhs: lhs, rhs: rhs)
 }
 
@@ -96,12 +96,12 @@ func && (lhs: some QueryExpression<Bool>, rhs: some QueryExpression<Bool>) -> so
 /// - Parameter lhs: The first element to compare
 /// - Parameter rhs: The second element to compare
 /// - Returns: A `QueryExpression` for the AND condition between the two elements.
-struct And<LHS: QueryExpression, RHS: QueryExpression>: QueryExpression {
-    typealias QueryValue = Bool
+public struct And<LHS: QueryExpression, RHS: QueryExpression>: QueryExpression {
+    public typealias QueryValue = Bool
     let lhs: LHS
     let rhs: RHS
 
-    var queryString: String {
+    public var queryString: String {
         "(\(lhs.queryString) AND \(rhs.queryString))"
     }
 }
@@ -109,6 +109,6 @@ struct And<LHS: QueryExpression, RHS: QueryExpression>: QueryExpression {
 // MARK: - Misc
 
 extension Int: QueryExpression {
-    typealias QueryValue = Self
-    var queryString: String { "\(self)" }
+    public typealias QueryValue = Self
+    public var queryString: String { "\(self)" }
 }

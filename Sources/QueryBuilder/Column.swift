@@ -8,7 +8,11 @@
 /// Represents a SQL column
 /// - Parameter QueryValue: The type of the column
 /// - Parameter name: The name of the column
-struct Column<QueryValue>: QueryExpression {
-    var name: String
-    var queryString: String { name }
+public struct Column<QueryValue>: QueryExpression {
+    public var name: String
+    public var queryString: String { name }
+
+    public init(name: String) {
+        self.name = name
+    }
 }
